@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/eportal")
@@ -44,14 +45,16 @@ public class HomeController
    }
 
    @GetMapping("/home")
-   public String homePage(Model model)
+   public ModelAndView homePage(Model model)
    {
       model.addAttribute("appName", appName);
 
       System.out.println("App name: " + appName);
       //set events
+      ModelAndView mav = new ModelAndView("home");
+      mav.addObject("appName", appName);
 
-      return "home";
+      return mav;
    }
 
    // list
