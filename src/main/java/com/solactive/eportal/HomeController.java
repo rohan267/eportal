@@ -105,13 +105,13 @@ public class HomeController
 
    @PostMapping("/events/add")
    @ResponseStatus(HttpStatus.CREATED)
-   public ModelAndView create(@ModelAttribute("event") @RequestBody Event event)
+   public ModelAndView create(@ModelAttribute("event") @RequestBody Event event, Model model)
    {
       ModelAndView mav = new ModelAndView("home");
       mav.addObject("appName", appName);
       Event eventCreated = eventRepository.save(event);
       mav.addObject("event", eventCreated);
-      return mav;
+      return homePage(model);
    }
 
    @PostMapping("/events/{eventId}/add")
