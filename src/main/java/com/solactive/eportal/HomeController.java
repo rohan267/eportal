@@ -30,15 +30,16 @@ public class HomeController
    @Value("${spring.application.name}")
    String appName;
 
-    @GetMapping("/list")
-    public List<String> getList() {
-        List<String> list = new ArrayList<>();
-        list.add("event 1");
-        list.add("event 2");
-        list.add("event 3");
-       list.add("event 4");
-       list.add("event 5");
-        return list;
+   @GetMapping("/list")
+   public List<String> getList()
+   {
+      List<String> list = new ArrayList<>();
+      list.add("event 1");
+      list.add("event 2");
+      list.add("event 3");
+      list.add("event 4");
+      list.add("event 5");
+      return list;
 
    }
 
@@ -46,17 +47,24 @@ public class HomeController
    public String homePage(Model model)
    {
       model.addAttribute("appName", appName);
+
+      System.out.println("App name: " + appName);
+      //set events
+
       return "home";
    }
+
    // list
    @GetMapping("/events")
-   public List<Event> getEvents() {
+   public List<Event> getEvents()
+   {
       return (List<Event>) eventRepository.findAll();
    }
 
    @GetMapping("/events/{id}")
-   public Event getEvents(@PathVariable("id") Long id) {
-      Optional<Event>  eventOptional = eventRepository.findById(id);
+   public Event getEvents(@PathVariable("id") Long id)
+   {
+      Optional<Event> eventOptional = eventRepository.findById(id);
       if (eventOptional.isPresent())
       {
          eventOptional.get();
@@ -66,7 +74,8 @@ public class HomeController
 
    @PostMapping("/events/add")
    @ResponseStatus(HttpStatus.CREATED)
-   public Event getEvents(@RequestBody Event event) {
+   public Event getEvents(@RequestBody Event event)
+   {
       return eventRepository.save(event);
    }
 }
