@@ -79,8 +79,8 @@
         <form id="addReplyForm" name="replyForm" th:action="@{/eportal/events/{id}/add(id=${event.id})}" th:object="${eventReply}" method="post">
             <div class="form-group">
                 <label for="reply">Replies</label>
-                <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
-                <input th:field="*{message}" type="textarea" class="form-control" id="reply" aria-describedby="reply" placeholder="Enter any reply" style="height: 50px; ">
+                <textarea class="form-control" id="reply" rows="3"></textarea>
+                <!--<input th:field="*{message}" type="textarea" class="form-control" id="reply" aria-describedby="reply" placeholder="Enter any reply" style="height: 50px; ">-->
                 <br>
                 <div>
                     <input class="btn btn-primary" align="right" type="submit" value="Submit">
