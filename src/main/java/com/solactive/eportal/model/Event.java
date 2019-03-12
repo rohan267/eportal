@@ -1,37 +1,50 @@
 package com.solactive.eportal.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Event implements Serializable
 {
-   private  Integer id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   private  Long id;
 
+   @Column(nullable = false, unique = true)
    private  String title;
 
+   @Column
    private String description;
 
    private EventType eventType;
 
+   @Column
    private String photo;
 
-   private Date createdAt;
+   @Column(nullable = false)
+   private Date createdAt = new Date();
 
-   private Date updatedAt;
-
-
-   public Event(Integer id, String name)
+   public Event(Long id, String name)
    {
       this.id = id;
       this.title = name;
    }
 
-   public Integer getId()
+   public Event()
+   {
+   }
+
+   public Long getId()
    {
       return id;
    }
 
-   public void setId(Integer id)
+   public void setId(Long id)
    {
       this.id = id;
    }
@@ -84,15 +97,5 @@ public class Event implements Serializable
    public void setCreatedAt(Date createdAt)
    {
       this.createdAt = createdAt;
-   }
-
-   public Date getUpdatedAt()
-   {
-      return updatedAt;
-   }
-
-   public void setUpdatedAt(Date updatedAt)
-   {
-      this.updatedAt = updatedAt;
    }
 }
