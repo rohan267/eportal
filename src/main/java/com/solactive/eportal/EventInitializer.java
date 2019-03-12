@@ -24,7 +24,7 @@ public class EventInitializer implements InitializingBean
 
       Event event1 = new Event();
       event1.setEventType(EventType.SELL);
-      event1.setTitle("TV-Bank");
+      event1.setTitle("TV for Sale !");
       event1.setDescription("Hey Leute ,\n"
             + "\n"
             + "zum Verkauf steht meine schöne TV-Bank.\n"

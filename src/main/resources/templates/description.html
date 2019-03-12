@@ -15,7 +15,7 @@
     <script>
 
         (function($){
-            var $form = $('#replyForm');
+            var $form = $('#addReplyForm');
             $form.on('submit', function(e) {
                 e.preventDefault();
                 $.ajax({
@@ -24,9 +24,13 @@
                     data: $form.serialize(),
                     success: function(response) {
                         // if the response contains any errors, replace the form
+                        console.log("success");
                         if ($(response).find('.has-error').length) {
+                            console.log("29");
                             $form.replaceWith(response);
                         } else {
+                            console.log("32");
+                            $("#repliesDiv").html(response);
                             // in this case we can actually replace the form
                             // with the response as well, unless we want to
                             // show the success message a different way
@@ -63,31 +67,34 @@
         <div class="col-lg-10">
         <p th:text="${event.description}"></p>
         <!--<div class="col-lg-6" style="background-color:yellow;">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>
+            Lorem ipsum dolor sit amet, consectetur adipisicˇing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
-        <div class="col-lg-6" style="background-color:pink;">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
         </div>-->
         </div>
     </div>
     <br><br>
-    <form id="userInfo" name="replyForm" th:action="@{/eportal/events/{id}/add(id=${event.id})}" th:object="${eventReply}" method="post">
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Replies</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <br>
-            <div>
-                <input class="btn btn-primary" align="right" type="submit" value="Submit">
+    <div th:fragment="info-form" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+        <form id="addReplyForm" name="replyForm" th:action="@{/eportal/events/{id}/add(id=${event.id})}" th:object="${eventReply}" method="post">
+            <div class="form-group">
+                <label for="reply">Replies</label>
+                <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                <input th:field="*{message}" type="textarea" class="form-control" id="reply" aria-describedby="reply" placeholder="Enter any reply" style="height: 50px; ">
+                <br>
+                <div>
+                    <input class="btn btn-primary" align="right" type="submit" value="Submit">
+                </div>
             </div>
-
+        </form>
+    </div>
+        <form id="repliesForm" name="createReply" th:action="@{/eportal/events/add}" th:object="${event}" method="post">
+        <div id="repliesDiv" class="list-group" th:each="reply: ${event.replies}">
+            <div class="col-form-label">
+                <span th:text="${reply.message}"></span>
+            </div>
         </div>
     </form>
-    <div class="list-group" th:each="reply : ${event.replies}">
-        <div class="col-form-label">
-            <h5 th:text="${reply.message}"></h5>
-        </div>
-    </div>
 </div>
 <div class="align-content-md-around">
 
