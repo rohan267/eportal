@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+
+        (function($){
+            var $form = $('#userInfo');
+            $form.on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'post',
+                    data: $form.serialize(),
+                    success: function(response) {
+                        // if the response contains any errors, replace the form
+                        if ($(response).find('.has-error').length) {
+                            $form.replaceWith(response);
+                        } else {
+                            // in this case we can actually replace the form
+                            // with the response as well, unless we want to
+                            // show the success message a different way
+                        }
+                    }
+                });
+            })
+        }(jQuery));
+
+    </script>
 </head>
 <body>
 
@@ -26,7 +51,7 @@
         </div>
     </div>
     <br><br>
-    <div class="align-content-md-around">
+    <form id="userInfo" name="userInfo" th:action="@{/eportal/events/1/reply}" th:object="${userInfo}" method="post">
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Replies</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -36,7 +61,9 @@
             </div>
 
         </div>
-    </div>
+    </form>
+</div>
+<div class="align-content-md-around">
 
 </div>
 
