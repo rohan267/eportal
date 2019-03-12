@@ -26,7 +26,6 @@ public class HomeController
       list.add("event 2");
       list.add("event 3");
       list.add("event 4");
-      list.add("event 5");
       return list;
 
    }
