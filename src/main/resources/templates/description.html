@@ -12,13 +12,6 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            background-image: url("https://ideasphere.com/wp-content/uploads/2016/08/Savin-NY-Website-Background-Web-1.jpg");
-            background-size:cover;
-        }
-    </style>
-    <title>Solactive Social Portal</title>
     <script>
 
         (function($){
@@ -44,8 +37,16 @@
         }(jQuery));
 
     </script>
-</head>
-<body>
+    <style>
+        body {
+            background-image: url("https://cdn.cnn.com/cnnnext/dam/assets/160901155821-chicago-viz-bg-7-super-43.jpg");
+            background-size:cover;
+        }
+        img {
+            float: left;
+        }
+    </style>
+    <title>Solactive Social Portal</title>
 <div class="navigation">
     <div class="navbar navbar-inverse">
         <a href="/eportal/home" class="navbar-brand">Home</a>
@@ -53,8 +54,10 @@
         <a href="/eportal/feed" class="navbar-brand">Feed</a>
     </div>
 </div>
-<div class="container-fluid">
-    <h3 th:text="${event.title}"></h3>
+</head>
+<body>
+<div class="container">
+    <h4 th:text="${event.title}"></h4>
 
     <div class="row">
         <div class="col-lg-10">

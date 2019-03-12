@@ -15,8 +15,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
         body {
-            background-image: url("https://ideasphere.com/wp-content/uploads/2016/08/Savin-NY-Website-Background-Web-1.jpg");
+            background-image: url("https://cdn.cnn.com/cnnnext/dam/assets/160901155821-chicago-viz-bg-7-super-43.jpg");
             background-size:cover;
+        }
+        img {
+            float: left;
         }
     </style>
     <title>Solactive Social Portal</title>
@@ -31,11 +34,12 @@
 </div>
 
 <div class="container">
-    <div class="list-group" th:each="event : ${events}">
+    <div class="list-group" th:each="event : ${events}" >
         <a class="list-group-item list-group-item-action active" href="/eportal/events/" th:href="@{/eportal/events/{id}(id=${event.id})}">
         <div class="d-flex w-100 justify-content-between">
-            <img src="https://www.pri-bio.com/wp-content/uploads/sites/2/2015/11/annual-certification-small-thumbnail.png" class="align-self-start mr-3" alt="...">
-            <h5 th:text="${event.title}">Our App</h5> &nbsp;&nbsp;<small>Today</small>
+            <img src="https://www.pri-bio.com/wp-content/uploads/sites/2/2015/11/annual-certification-small-thumbnail.png" class="align-self-start mr-3" style="height:75px">
+            <small style="float:right;">Today</small>
+            <h3 th:text="${event.title}">Our App</h3>
         </div>
         <p class="mb-1" th:text="${event.description}">iphone for sale. just used for 6 months</p>
         <small>Donec id elit non mi porta.</small>
