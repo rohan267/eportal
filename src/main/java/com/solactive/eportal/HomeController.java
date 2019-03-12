@@ -85,8 +85,7 @@ public class HomeController
    public ModelAndView getEvent(@PathVariable("id") String id)
    {
       Optional<Event> eventOptional = eventRepository.findById(Long.valueOf(id));
-      ModelAndView mav = new ModelAndView("events");
-      mav.addObject("appName", appName);
+      ModelAndView mav = new ModelAndView("description");
       Event event = null;
 
       if (eventOptional.isPresent())
