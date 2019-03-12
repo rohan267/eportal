@@ -82,9 +82,9 @@ public class HomeController
    }
 
    @GetMapping("/events/{id}")
-   public ModelAndView getEvent(@PathVariable("id") Long id)
+   public ModelAndView getEvent(@PathVariable("id") String id)
    {
-      Optional<Event> eventOptional = eventRepository.findById(id);
+      Optional<Event> eventOptional = eventRepository.findById(Long.valueOf(id));
       ModelAndView mav = new ModelAndView("events");
       mav.addObject("appName", appName);
       Event event = null;
