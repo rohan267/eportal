@@ -1,17 +1,29 @@
 package com.solactive.eportal.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Event implements Serializable
 {
    private  Integer id;
 
-   private  String name;
+   private  String title;
+
+   private String description;
+
+   private EventType eventType;
+
+   private String photo;
+
+   private Date createdAt;
+
+   private Date updatedAt;
+
 
    public Event(Integer id, String name)
    {
       this.id = id;
-      this.name = name;
+      this.title = name;
    }
 
    public Integer getId()
@@ -24,13 +36,63 @@ public class Event implements Serializable
       this.id = id;
    }
 
-   public String getName()
+   public String getTitle()
    {
-      return name;
+      return title;
    }
 
-   public void setName(String name)
+   public void setTitle(String title)
    {
-      this.name = name;
+      this.title = title;
+   }
+
+   public String getDescription()
+   {
+      return description;
+   }
+
+   public void setDescription(String description)
+   {
+      this.description = description;
+   }
+
+   public EventType getEventType()
+   {
+      return eventType;
+   }
+
+   public void setEventType(EventType eventType)
+   {
+      this.eventType = eventType;
+   }
+
+   public String getPhoto()
+   {
+      return photo;
+   }
+
+   public void setPhoto(String photo)
+   {
+      this.photo = photo;
+   }
+
+   public Date getCreatedAt()
+   {
+      return createdAt;
+   }
+
+   public void setCreatedAt(Date createdAt)
+   {
+      this.createdAt = createdAt;
+   }
+
+   public Date getUpdatedAt()
+   {
+      return updatedAt;
+   }
+
+   public void setUpdatedAt(Date updatedAt)
+   {
+      this.updatedAt = updatedAt;
    }
 }
