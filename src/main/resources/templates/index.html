@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Create Event</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" href="static/css/clean-blog.css">
@@ -22,8 +22,35 @@
             background-size:cover;
         }
     </style>
-</head>
 
+    <script>
+
+        (function($){
+            var $form = $('#createEventForm');
+            $form.on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'post',
+                    data: $form.serialize(),
+                    success: function(response) {
+                        // if the response contains any errors, replace the form
+                        if ($(response).find('.has-error').length) {
+                            $form.replaceWith(response);
+                        } else {
+                            // in this case we can actually replace the form
+                            // with the response as well, unless we want to
+                            // show the success message a different way
+                        }
+                    }
+                });
+            })
+        }(jQuery));
+
+    </script>
+
+</head>
+<body>
 <div class="navigation">
     <div class="navbar navbar-inverse">
         <a href="/eportal/home" class="navbar-brand">Home</a>
@@ -31,19 +58,16 @@
         <a href="/eportal/feed" class="navbar-brand">Feed</a>
     </div>
 </div>
+<div th:fragment="info-form" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+    <form id="createEventForm" name="createEvent" th:action="@{/eportal/events/add}" th:object="${event}" method="post">
 
-
-<body>
-<div class="container" padding="60px";>
-<form align="center" >
-
-    <div class="form-group" >
+    <div class="form-group" name="eventCreateForm">
         <label for="exampleInputEmail1">Event Name</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter event name" style="height: 50px; ">
+        <input th:field="*{title}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter event name" style="height: 50px; ">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Event Description</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter event description" style="height: 200px;">
+        <label for="exampleInputDescription">Event Description</label>
+        <input th:field="*{description}" type="textarea" class="form-control" id="exampleInputDescription" placeholder="Enter event description" style="height: 200px;">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 

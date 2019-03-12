@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,9 +69,9 @@ public class HomeController
    {
       model.addAttribute("appName", appName);
 
-      System.out.println("App name: " + appName);
       //set events
       ModelAndView mav = new ModelAndView("index");
+      mav.addObject("event", new Event());
       mav.addObject("appName", appName);
 
       return mav;
@@ -104,9 +105,9 @@ public class HomeController
 
    @PostMapping("/events/add")
    @ResponseStatus(HttpStatus.CREATED)
-   public ModelAndView create(@RequestBody Event event)
+   public ModelAndView create(@ModelAttribute("event") @RequestBody Event event)
    {
-      ModelAndView mav = new ModelAndView("events");
+      ModelAndView mav = new ModelAndView("home");
       mav.addObject("appName", appName);
       Event eventCreated = eventRepository.save(event);
       mav.addObject("event", eventCreated);
