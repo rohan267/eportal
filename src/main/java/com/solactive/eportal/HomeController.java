@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.solactive.eportal.dao.EventReplyRepository;
 import com.solactive.eportal.dao.EventRepository;
 import com.solactive.eportal.model.Event;
+import com.solactive.eportal.model.EventReply;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,9 @@ public class HomeController
 
    @Autowired
    private EventRepository eventRepository;
+
+   @Autowired
+   private EventReplyRepository eventReplyRepository;
 
    @Value("${spring.application.name}")
    String appName;
@@ -105,6 +110,23 @@ public class HomeController
       mav.addObject("appName", appName);
       Event eventCreated = eventRepository.save(event);
       mav.addObject("event", eventCreated);
+      return mav;
+   }
+
+   @PostMapping("/events/{eventId}/add")
+   @ResponseStatus(HttpStatus.CREATED)
+   public ModelAndView create(@RequestBody EventReply eventReply, @PathVariable("eventId") String eventId)
+   {
+      ModelAndView mav = new ModelAndView("events");
+      mav.addObject("appName", appName);
+      Optional<Event> eventOptional = eventRepository.findById(Long.valueOf(eventId));
+      if (eventOptional.isPresent())
+      {
+         eventReply.setEvent(eventOptional.get());
+      }
+
+      EventReply eventReplyCreated = eventReplyRepository.save(eventReply);
+      mav.addObject("eventReply", eventReplyCreated);
       return mav;
    }
 }

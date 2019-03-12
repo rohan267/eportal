@@ -1,12 +1,21 @@
 package com.solactive.eportal.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.util.CollectionUtils;
 
 @Entity
 public class Event implements Serializable
@@ -18,16 +27,21 @@ public class Event implements Serializable
    @Column(nullable = false, unique = true)
    private  String title;
 
-   @Column(length = 100000000)
+   @Lob
    private String description;
 
    private EventType eventType;
 
+   @OneToMany(cascade = CascadeType.ALL,
+         fetch = FetchType.LAZY,
+         mappedBy = "event")
+   private List<EventReply> replies;
+
    @Column
    private String photo;
 
-   @Column(nullable = false)
-   private Date createdAt = new Date();
+   @CreatedDate
+   private Date createdAt;
 
    public Event(Long id, String name)
    {
@@ -97,5 +111,25 @@ public class Event implements Serializable
    public void setCreatedAt(Date createdAt)
    {
       this.createdAt = createdAt;
+   }
+
+   public List<EventReply> getReplies()
+   {
+      return replies;
+   }
+
+   public void setReplies(List<EventReply> replies)
+   {
+      this.replies = replies;
+   }
+
+   public void addReply(EventReply reply)
+   {
+      if (CollectionUtils.isEmpty(replies))
+      {
+         replies = new ArrayList<>();
+      }
+
+      replies.add(reply);
    }
 }

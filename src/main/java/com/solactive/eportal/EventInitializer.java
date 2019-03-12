@@ -1,7 +1,9 @@
 package com.solactive.eportal;
 
+import com.solactive.eportal.dao.EventReplyRepository;
 import com.solactive.eportal.dao.EventRepository;
 import com.solactive.eportal.model.Event;
+import com.solactive.eportal.model.EventReply;
 import com.solactive.eportal.model.EventType;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -13,6 +15,9 @@ public class EventInitializer implements InitializingBean
 {
    @Autowired
    private EventRepository eventRepository;
+
+   @Autowired
+   private EventReplyRepository eventReplyRepository;
 
    @Override public void afterPropertiesSet() throws Exception
    {
@@ -32,6 +37,12 @@ public class EventInitializer implements InitializingBean
             + "\n");
 
       eventRepository.save(event1);
+
+      EventReply reply1 = new EventReply();
+      reply1.setMessage("Hi, I am intereseted.");
+      reply1.setEvent(event1);
+
+      eventReplyRepository.save(reply1);
 
       Event event2 = new Event();
       event2.setEventType(EventType.SELL);
