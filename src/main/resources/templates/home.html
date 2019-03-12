@@ -13,10 +13,15 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <title>Hello, world!</title>
+
+    <style>
+        body {
+
+            background-image: url("https://ideasphere.com/wp-content/uploads/2016/08/Savin-NY-Website-Background-Web-1.jpg");
+            background-size:cover;
+        }
+    </style>
 </head>
-<body>
-</body>
 
 <div class="navigation">
     <div class="navbar navbar-inverse">
@@ -26,22 +31,25 @@
     </div>
 </div>
 
-<html>
-<head><title>Home Page</title></head>
-<body>
-<!--<h1>Hello !</h1>
-<p>Welcome to <span th:text="${appName}">Our App</span></p>-->
-</body>
-</html>
-<div class="container">
-    <div class="list-group" th:each="event : ${events}">
-        <a class="list-group-item list-group-item-action active" href="/eportal/events/" th:href="@{/eportal/events/{id}(id=${event.id})}">
-        <div class="d-flex w-100 justify-content-between">
+<div class="container"  >
+<div class="list-group" padding="60px";>
+    <a href="#" class="list-group-item list-group-item-action active">
+        <div class="d-flex w-100 justify-content-between" >
+            <img src="https://www.pri-bio.com/wp-content/uploads/sites/2/2015/11/annual-certification-small-thumbnail.png" class="align-self-start mr-3" alt="...">
             <!--<h5 class="mb-1">${event.get(0)}</h5>-->
-            <h5 th:text="${event.title}">Our App</h5> &nbsp;&nbsp;<small>Today</small>
+            <h5 th:text="${events.get(0).title}">Our App</h5> &nbsp;&nbsp;<small>Today</small>
         </div>
-        <p class="mb-1" th:text="${event.description}">iphone for sale. just used for 6 months</p>
+
+        <p class="mb-1"><h3>iphone for sale. just used for 6 months</h3></p>
         <small>Donec id elit non mi porta.</small>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <img src="https://www.pri-bio.com/wp-content/uploads/sites/2/2015/11/annual-certification-small-thumbnail.png" class="align-self-start mr-3" alt="...">
+            <h5 th:text="${events.get(1).title}">Our App</h5>&nbsp;<small>2 days ago</small>
+        </div>
+        <p class="mb-1"><h3>We are planning for poker evening on coming Friday. Please RSVP for the event...</h3></p>
+        <small class="text-muted">Donec id elit non mi porta.</small>
     </a>
 </div>
 </div>
