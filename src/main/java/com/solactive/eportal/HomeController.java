@@ -54,8 +54,8 @@ public class HomeController
       Event event3 = new Event();
       event3.setTitle("Poker evening on coming Friday");
       list.add(event3);
-
-      return list;
+      eventRepository.saveAll(list);
+      return (List<Event>) eventRepository.findAll();
    }
 
    @GetMapping("/home")
