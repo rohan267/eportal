@@ -116,7 +116,7 @@ public class HomeController
 
    @PostMapping("/events/{eventId}/add")
    @ResponseStatus(HttpStatus.CREATED)
-   public ModelAndView create(@RequestBody EventReply eventReply, @PathVariable("eventId") String eventId)
+   public ModelAndView create(@ModelAttribute("eventReply") @RequestBody EventReply eventReply, @PathVariable("eventId") String eventId, Model model)
    {
       ModelAndView mav = new ModelAndView("events");
       mav.addObject("appName", appName);
@@ -128,6 +128,6 @@ public class HomeController
 
       EventReply eventReplyCreated = eventReplyRepository.save(eventReply);
       mav.addObject("eventReply", eventReplyCreated);
-      return mav;
+      return getEvent(eventId);
    }
 }

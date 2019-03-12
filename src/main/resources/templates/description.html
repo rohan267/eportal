@@ -72,7 +72,7 @@
         </div>
     </div>
     <br><br>
-    <form id="userInfo" name="replyForm" th:action="@{/eportal/events/{id}/add}" th:object="${eventReply}" method="post">
+    <form id="userInfo" name="replyForm" th:action="@{/eportal/events/{id}/add(id=${event.id})}" th:object="${eventReply}" method="post">
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Replies</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -83,6 +83,11 @@
 
         </div>
     </form>
+    <div class="list-group" th:each="reply: ${event.replies}">
+        <div class="col-form-label">
+            <span th:text="${reply.message}"></span>
+        </div>
+    </div>
 </div>
 <div class="align-content-md-around">
 
