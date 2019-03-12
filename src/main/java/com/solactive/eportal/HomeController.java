@@ -72,26 +72,39 @@ public class HomeController
 
    // list
    @GetMapping("/events")
-   public List<Event> getEvents()
+   public ModelAndView getEvents()
    {
-      return (List<Event>) eventRepository.findAll();
+      ModelAndView mav = new ModelAndView("events");
+      mav.addObject("appName", appName);
+      mav.addObject("events", eventRepository.findAll());
+      return mav;
    }
 
    @GetMapping("/events/{id}")
-   public Event getEvents(@PathVariable("id") Long id)
+   public ModelAndView getEvent(@PathVariable("id") Long id)
    {
       Optional<Event> eventOptional = eventRepository.findById(id);
+      ModelAndView mav = new ModelAndView("events");
+      mav.addObject("appName", appName);
+      Event event = null;
+
       if (eventOptional.isPresent())
       {
-         eventOptional.get();
+         event = eventOptional.get();
       }
-      return null;
+
+      mav.addObject("event", event);
+      return mav;
    }
 
    @PostMapping("/events/add")
    @ResponseStatus(HttpStatus.CREATED)
-   public Event getEvents(@RequestBody Event event)
+   public ModelAndView create(@RequestBody Event event)
    {
-      return eventRepository.save(event);
+      ModelAndView mav = new ModelAndView("events");
+      mav.addObject("appName", appName);
+      Event eventCreated = eventRepository.save(event);
+      mav.addObject("event", eventCreated);
+      return mav;
    }
 }
