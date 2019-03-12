@@ -127,6 +127,7 @@ public class HomeController
       }
 
       EventReply eventReplyCreated = eventReplyRepository.save(eventReply);
+      System.out.println(eventRepository.findById(Long.parseLong(eventId)).get().getReplies().size());
       mav.addObject("eventReply", eventReplyCreated);
       return getEvent(eventId);
    }
