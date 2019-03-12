@@ -70,9 +70,12 @@ public class EventInitializer implements InitializingBean
 
       Event event5 = new Event();
       event5.setEventType(EventType.QUERY);
-      event5.setTitle("My husband was robbed in the night");
+      event5.setTitle("Lampe „Zauberer“ UNIKAT");
       event5.setDescription(
-            "Hello! My husband was robbed in the night from Friday to Saturday in U6. He was very tired after work and he fell asleep (yes, he knows he shouldn't have done it), thieves took his wallet, mobile phone and headset, they left only house keys (do you think they could have copied them somehow?). We have no hope to get the cash and phone back, but perhaps the thieves threw out my husband's wallet and documents: passport, residence card, driving license, ATM cards, insurance card... Last time my husband's mobile phone logged into the Weding district. If any of you found a brown wallet with documents issued under the name of Sukhraj Singh, please let me know. Thank you!");
+            "90cm hoch \n"
+                  + "10 kg schwer\n"
+                  + "Lampe zwischen den Beinen am Sitz mit Batterien betrieben. \n"
+                  + "War mal eine Marionette. Sehr detailgetreu gearbeitet. Abzuholen in Berlin Lichtenberg oder Versand gegen Aufpreis.");
 
       eventRepository.save(event5);
 

@@ -18,7 +18,7 @@ public class Event implements Serializable
    @Column(nullable = false, unique = true)
    private  String title;
 
-   @Column
+   @Column(length = 100000000)
    private String description;
 
    private EventType eventType;
