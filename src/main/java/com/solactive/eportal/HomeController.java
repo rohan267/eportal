@@ -46,18 +46,6 @@ public class HomeController
 
    }
 
-   private List<Event> prepareList() {
-      Event event2 = new Event();
-      event2.setTitle("Want to sell my phone. Anyone interested?");
-      list.add(event2);
-
-      Event event3 = new Event();
-      event3.setTitle("Poker evening on coming Friday");
-      list.add(event3);
-      eventRepository.saveAll(list);
-      return (List<Event>) eventRepository.findAll();
-   }
-
    @GetMapping("/home")
    public ModelAndView homePage(Model model)
    {
@@ -65,7 +53,7 @@ public class HomeController
 
       ModelAndView mav = new ModelAndView("home");
       mav.addObject("appName", appName);
-      mav.addObject("events", prepareList());
+      mav.addObject("events", (List<Event>) eventRepository.findAll());
 
       return mav;
    }

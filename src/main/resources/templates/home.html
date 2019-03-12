@@ -34,21 +34,14 @@
 </body>
 </html>
 <div class="container">
-<div class="list-group">
+    <div class="list-group" th:each="event : ${events}">
     <a href="#" class="list-group-item list-group-item-action active">
         <div class="d-flex w-100 justify-content-between">
             <!--<h5 class="mb-1">${event.get(0)}</h5>-->
-            <h5 th:text="${events.get(0).title}">Our App</h5> &nbsp;&nbsp;<small>Today</small>
+            <h5 th:text="${event.title}">Our App</h5> &nbsp;&nbsp;<small>Today</small>
         </div>
-        <p class="mb-1">iphone for sale. just used for 6 months</p>
+        <p class="mb-1" th:text="${event.description}">iphone for sale. just used for 6 months</p>
         <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 th:text="${events.get(1).title}">Our App</h5>&nbsp;<small>2 days ago</small>
-        </div>
-        <p class="mb-1">We are planning for poker evening on coming Friday. Please RSVP for the event...</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
     </a>
 </div>
 </div>
