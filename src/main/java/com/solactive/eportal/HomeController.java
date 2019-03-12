@@ -31,6 +31,8 @@ public class HomeController
    @Value("${spring.application.name}")
    String appName;
 
+   List<Event> list = new ArrayList<>();
+
    @GetMapping("/list")
    public List<String> getList()
    {
@@ -44,15 +46,26 @@ public class HomeController
 
    }
 
+   private List<Event> prepareList() {
+      Event event2 = new Event();
+      event2.setTitle("Want to sell my phone. Anyone interested?");
+      list.add(event2);
+
+      Event event3 = new Event();
+      event3.setTitle("Poker evening on coming Friday");
+      list.add(event3);
+
+      return list;
+   }
+
    @GetMapping("/home")
    public ModelAndView homePage(Model model)
    {
       model.addAttribute("appName", appName);
 
-      System.out.println("App name: " + appName);
-      //set events
       ModelAndView mav = new ModelAndView("home");
       mav.addObject("appName", appName);
+      mav.addObject("events", prepareList());
 
       return mav;
    }
