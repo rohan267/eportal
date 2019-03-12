@@ -70,6 +70,19 @@ public class HomeController
       return mav;
    }
 
+   @GetMapping("/index")
+   public ModelAndView index(Model model)
+   {
+      model.addAttribute("appName", appName);
+
+      System.out.println("App name: " + appName);
+      //set events
+      ModelAndView mav = new ModelAndView("index");
+      mav.addObject("appName", appName);
+
+      return mav;
+   }
+
    // list
    @GetMapping("/events")
    public ModelAndView getEvents()
